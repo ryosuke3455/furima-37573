@@ -14,9 +14,8 @@
 |birthday          |date  |null: false              |
 
 ### Association
-  .has_many :items
-  .has_many :bought_recs
-  .has_one :address
+  .has_many :items, dependent: :destroy
+  .has_many :bought_recs, dependent: :destroy
 
 
 ## Itemsテーブル
@@ -35,9 +34,8 @@
 
 ### Association
 
-  .belongs_to :user, dependent: :destroy
-  .belongs_to :bought_rec
-  .has_one :address
+  .belongs_to :user
+  .has_one :bought_rec
 
 ## Addressesテーブル
 
@@ -54,8 +52,7 @@
 
 ### Association
 
-  .belongs_to :user, dependent: :destroy
-  .belongs_to :item
+  .belongs_to :bought_rec
 
 
 ## bought_recテーブル
@@ -67,5 +64,6 @@
 
 ### Association
 
-  .belongs_to :user, dependent: :destroy
-  .has_one :item
+  .has_one :address
+  .belongs_to :item
+  .belongs_to :user
