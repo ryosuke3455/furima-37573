@@ -7,8 +7,8 @@
 |nickname          |string|null: false              |
 |first_name        |string|null: false              |
 |last_name         |string|null: false              |
-|first_name(rubi)  |string|null: false              |
-|last_name(rubi)   |string|null: false              |
+|first_name_kana   |string|null: false              |
+|last_name_kana    |string|null: false              |
 |email             |string|null: false, unique: true|
 |encrypted_password|string|null: false              |
 |birthday          |date  |null: false              |
@@ -21,7 +21,7 @@
 |category_id       |integer   |null: false                   |
 |price             |integer   |null: false                   |
 |quality_id        |integer   |null: false                   |
-|prefectures_id    |integer   |null: false                   |
+|prefecture_id     |integer   |null: false                   |
 |delivery_charge_id|integer   |null: false                   |
 |user              |references|null: false, foreign_key: true|
 |posting_id        |integer   |null: false                   |
@@ -34,8 +34,9 @@
 |phone         |string    |null: false                   |
 |user          |references|null: false, foreign_key: true|
 |city          |string    |null: false                   |
+|address       |string    |null: false                   |
 |building      |string    |null: false                   |
-|prefectures_id|integer   |null: false                   |
+|prefecture_id |integer   |null: false                   |
 |bought_rec    |references|null: false, foreign_key: true|
 
 
