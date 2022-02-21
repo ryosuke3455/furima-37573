@@ -13,6 +13,12 @@
 |encrypted_password|string|null: false              |
 |birthday          |date  |null: false              |
 
+### Association
+  .has_many :items
+  .has_many :bought_recs
+  .has_one :address
+
+
 ## Itemsテーブル
 
 |Column            |Type      |option                        |
@@ -21,10 +27,17 @@
 |category_id       |integer   |null: false                   |
 |price             |integer   |null: false                   |
 |quality_id        |integer   |null: false                   |
+|explanation       |text      |null: false                   |
 |prefecture_id     |integer   |null: false                   |
 |delivery_charge_id|integer   |null: false                   |
 |user              |references|null: false, foreign_key: true|
 |posting_id        |integer   |null: false                   |
+
+### Association
+
+  .belongs_to :user, dependent: :destroy
+  .belongs_to :bought_rec
+  .has_one :address
 
 ## Addressesテーブル
 
@@ -35,9 +48,14 @@
 |user          |references|null: false, foreign_key: true|
 |city          |string    |null: false                   |
 |address       |string    |null: false                   |
-|building      |string    |null: false                   |
+|building      |string    |                              |
 |prefecture_id |integer   |null: false                   |
 |bought_rec    |references|null: false, foreign_key: true|
+
+### Association
+
+  .belongs_to :user, dependent: :destroy
+  .belongs_to :item
 
 
 ## bought_recテーブル
@@ -46,3 +64,8 @@
 |-------|----------|------------------------------|
 |user   |references|null: false, foreign_key: true|
 |item   |references|null: false, foreign_ker: true|
+
+### Association
+
+  .belongs_to :user, dependent: :destroy
+  .has_one :item
