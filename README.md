@@ -2,29 +2,46 @@
 
 ## Usersテーブル
 
-|Column    |Type  |option            |
-|----------|------|------------------|
-|nickname  |string|null: false       |
-|name      |string|null: false       |
-|email     |string|null: false       |
-|password  |string|null: false       |
-|birthday  |string|null: false       |
+|Column            |Type  |option                   |
+|------------------|------|-------------------------|
+|nickname          |string|null: false              |
+|first_name        |string|null: false              |
+|last_name         |string|null: false              |
+|first_name(rubi)  |string|null: false              |
+|last_name(rubi)   |string|null: false              |
+|email             |string|null: false, unique: true|
+|encrypted_password|string|null: false              |
+|birthday          |date  |null: false              |
 
 ## Itemsテーブル
 
-|Column          |Type   |option      |
-|----------------|-------|------------|
-|name            |string |null: false |
-|category        |string |null: false |
-|price           |string |null: false |
-|quality         |string |null: false |
-|from            |string |null: false |
-|delivery_charge |string |null: false |
+|Column            |Type      |option                        |
+|------------------|----------|------------------------------|
+|name              |string    |null: false                   |
+|category_id       |integer   |null: false                   |
+|price             |integer   |null: false                   |
+|quality_id        |integer   |null: false                   |
+|prefectures_id    |integer   |null: false                   |
+|delivery_charge_id|integer   |null: false                   |
+|user              |references|null: false, foreign_key: true|
+|posting_id        |integer   |null: false                   |
 
-## Addressテーブル
+## Addressesテーブル
 
-|Column   |Type    |option      |
-|---------|--------|------------|
-|post_code|string  |null: false |
-|phone    |string  |null: false |
-|address  |text    |null: false |
+|Column        |Type      |option                        |
+|--------------|----------|------------------------------|
+|post_code     |string    |null: false                   |
+|phone         |string    |null: false                   |
+|user          |references|null: false, foreign_key: true|
+|city          |string    |null: false                   |
+|building      |string    |null: false                   |
+|prefectures_id|integer   |null: false                   |
+|bought_rec    |references|null: false, foreign_key: true|
+
+
+## bought_recテーブル
+
+|Column |Type      |option                        |
+|-------|----------|------------------------------|
+|user   |references|null: false, foreign_key: true|
+|item   |references|null: false, foreign_ker: true|
