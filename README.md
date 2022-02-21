@@ -1,24 +1,69 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Usersテーブル
 
-Things you may want to cover:
+|Column            |Type  |option                   |
+|------------------|------|-------------------------|
+|nickname          |string|null: false              |
+|first_name        |string|null: false              |
+|last_name         |string|null: false              |
+|first_name_kana   |string|null: false              |
+|last_name_kana    |string|null: false              |
+|email             |string|null: false, unique: true|
+|encrypted_password|string|null: false              |
+|birthday          |date  |null: false              |
 
-* Ruby version
+### Association
+  .has_many :items, dependent: :destroy
+  .has_many :bought_recs, dependent: :destroy
 
-* System dependencies
 
-* Configuration
+## Itemsテーブル
 
-* Database creation
+|Column            |Type      |option                        |
+|------------------|----------|------------------------------|
+|name              |string    |null: false                   |
+|category_id       |integer   |null: false                   |
+|price             |integer   |null: false                   |
+|quality_id        |integer   |null: false                   |
+|explanation       |text      |null: false                   |
+|prefecture_id     |integer   |null: false                   |
+|delivery_charge_id|integer   |null: false                   |
+|user              |references|null: false, foreign_key: true|
+|posting_id        |integer   |null: false                   |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+  .belongs_to :user
+  .has_one :bought_rec
 
-* Services (job queues, cache servers, search engines, etc.)
+## Addressesテーブル
 
-* Deployment instructions
+|Column        |Type      |option                        |
+|--------------|----------|------------------------------|
+|post_code     |string    |null: false                   |
+|phone         |string    |null: false                   |
+|user          |references|null: false, foreign_key: true|
+|city          |string    |null: false                   |
+|address       |string    |null: false                   |
+|building      |string    |                              |
+|prefecture_id |integer   |null: false                   |
+|bought_rec    |references|null: false, foreign_key: true|
 
-* ...
+### Association
+
+  .belongs_to :bought_rec
+
+
+## bought_recテーブル
+
+|Column |Type      |option                        |
+|-------|----------|------------------------------|
+|user   |references|null: false, foreign_key: true|
+|item   |references|null: false, foreign_ker: true|
+
+### Association
+
+  .has_one :address
+  .belongs_to :item
+  .belongs_to :user
