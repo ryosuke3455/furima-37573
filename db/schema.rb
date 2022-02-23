@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_023327) do
     t.string "last_name", null: false
     t.string "first_name_kana", null: false
     t.string "last_name_kana", null: false
-    t.string "birthday", null: false
+    t.date "birthday", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
