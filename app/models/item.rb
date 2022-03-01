@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   validates :delivery_charge_id, numericality: { other_than: 0 }
   validates :prefecture_id, numericality: { other_than: 0 }
   validates :posting_id, numericality: { other_than: 0 }
-  validates :price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  validates :price, presence: true, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
   belongs_to :user
   has_one :bought_rec
