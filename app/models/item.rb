@@ -13,5 +13,9 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :quality, :delivery_charge, :prefecture, :posting
+  belongs_to :category
+  belongs_to :quality
+  belongs_to :prefecture
+  belongs_to :posting
+  belongs_to :delivery_charge
 end
