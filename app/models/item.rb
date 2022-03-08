@@ -9,8 +9,10 @@ class Item < ApplicationRecord
   validates :posting_id, numericality: { other_than: 0 }
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
+  has_one :bought_rec
   belongs_to :user
   has_one_attached :image
+
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
