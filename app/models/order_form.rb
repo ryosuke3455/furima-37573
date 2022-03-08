@@ -10,7 +10,6 @@ class OrderForm
   validates :city, presence: true
   validates :address, presence: true
   validates :phone, presence: true, format: { with: /\A^0\d{9,10}$\z/}
-  
 
   def save
     bought_rec = BoughtRec.create(item_id: item_id, user_id: user_id)

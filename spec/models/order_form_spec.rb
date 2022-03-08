@@ -13,6 +13,10 @@ RSpec.describe OrderForm, type: :model do
       it 'item_id、user_id、post_code、prefecture_id、city、address、building、phone、tokenがあれば保存できる' do
         expect(@order_form).to be_valid
       end
+      it 'buildingは空でも保存できる' do
+        @order_form.building = ""
+        expect(@order_form).to be_valid
+      end
     end
 
     context '購入記録が保存できない時' do
@@ -55,6 +59,21 @@ RSpec.describe OrderForm, type: :model do
         @order_form.phone = ""
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Phone can't be blank")
+      end
+      it 'phoneが全角では保存できない' do
+        @order_form.phone = "０９０１１１１１１１１"
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone is invalid")
+      end
+      it 'phoneが9桁以下では保存できない' do
+        @order_form.phone = "090123456"
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone is invalid")
+      end
+      it 'phoneが12桁以上では保存できない' do
+        @order_form.phone = "090123456789"
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone is invalid")
       end
       it 'tokenが空では保存できない' do
         @order_form.token = ""
